@@ -37,9 +37,9 @@ const buttonVariants = cva(
         default: [
           "bg-primary text-primary-foreground",
           "border-primary",
-          "shadow-[0_1px_3px_0_rgba(93,58,28,0.18)]",
-          "hover:bg-sandalwood-600 hover:border-sandalwood-600",
-          "active:bg-sandalwood-700 active:border-sandalwood-700",
+          "shadow-[var(--shadow-primary)]",
+          "hover:bg-primary-hover hover:border-primary-hover",
+          "active:bg-primary-active active:border-primary-active",
         ],
 
         /* ── Secondary ───────────────────────────────────────────────────────
@@ -47,9 +47,9 @@ const buttonVariants = cva(
         secondary: [
           "bg-secondary text-secondary-foreground",
           "border-secondary",
-          "shadow-[0_1px_3px_0_rgba(15,56,33,0.22)]",
-          "hover:bg-dr-emerald-800 hover:border-dr-emerald-800",
-          "active:bg-dr-emerald-900 active:border-dr-emerald-900",
+          "shadow-[var(--shadow-secondary)]",
+          "hover:bg-secondary-hover hover:border-secondary-hover",
+          "active:bg-secondary-active active:border-secondary-active",
         ],
 
         /* ── Outline ─────────────────────────────────────────────────────────
@@ -58,8 +58,8 @@ const buttonVariants = cva(
           "bg-transparent text-primary",
           "border-primary",
           "shadow-none",
-          "hover:bg-sandalwood-100 hover:text-sandalwood-700",
-          "active:bg-sandalwood-200",
+          "hover:bg-outline-hover hover:text-outline-hover-foreground",
+          "active:bg-outline-active",
         ],
 
         /* ── Ghost ───────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ const buttonVariants = cva(
           "bg-transparent text-foreground",
           "border-transparent shadow-none",
           "hover:bg-accent hover:text-accent-foreground",
-          "active:bg-dr-emerald-200",
+          "active:bg-ghost-active",
         ],
 
         /* ── Destructive ─────────────────────────────────────────────────────
@@ -76,9 +76,9 @@ const buttonVariants = cva(
         destructive: [
           "bg-destructive text-destructive-foreground",
           "border-destructive",
-          "shadow-[0_1px_3px_0_rgba(184,60,43,0.22)]",
-          "hover:bg-[#a03325] hover:border-[#a03325]",
-          "active:bg-[#8a2b1e]",
+          "shadow-[var(--shadow-destructive)]",
+          "hover:bg-destructive-hover hover:border-destructive-hover",
+          "active:bg-destructive-active",
           "focus-visible:ring-destructive",
         ],
 

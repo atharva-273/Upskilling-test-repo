@@ -94,6 +94,37 @@
     --border:                  var(--sandalwood-200);
     --input:                   var(--sandalwood-200);
     --ring:                    var(--sandalwood-500);
+
+    /* -------------------------------------------------------------------------
+       INTERACTIVE STATE TOKENS
+       One token per interactive state per variant. Components reference only
+       these — never a raw primitive or hex directly.
+
+         --*-hover     colour when the pointer is over the element
+         --*-active    colour while the element is being pressed
+       ------------------------------------------------------------------------- */
+    --primary-hover:              var(--sandalwood-600);
+    --primary-active:             var(--sandalwood-700);
+
+    --secondary-hover:            var(--dr-emerald-800);
+    --secondary-active:           var(--dr-emerald-900);
+
+    --outline-hover:              var(--sandalwood-100);
+    --outline-hover-foreground:   var(--sandalwood-700);
+    --outline-active:             var(--sandalwood-200);
+
+    --ghost-active:               var(--dr-emerald-200);
+
+    --destructive-hover:          #A03325;
+    --destructive-active:         #8A2B1E;
+
+    /* -------------------------------------------------------------------------
+       SHADOW TOKENS
+       Named box-shadow values — referenced via var() so they stay in the system.
+       ------------------------------------------------------------------------- */
+    --shadow-primary:             0 1px 3px 0 rgba(93, 58, 28, 0.18);
+    --shadow-secondary:           0 1px 3px 0 rgba(15, 56, 33, 0.22);
+    --shadow-destructive:         0 1px 3px 0 rgba(184, 60, 43, 0.22);
   }
 }
 
@@ -127,6 +158,22 @@
   --color-border:               var(--border);
   --color-input:                var(--input);
   --color-ring:                 var(--ring);
+
+  /* Interactive state token → Tailwind utility mapping */
+  --color-primary-hover:            var(--primary-hover);
+  --color-primary-active:           var(--primary-active);
+
+  --color-secondary-hover:          var(--secondary-hover);
+  --color-secondary-active:         var(--secondary-active);
+
+  --color-outline-hover:            var(--outline-hover);
+  --color-outline-hover-foreground: var(--outline-hover-foreground);
+  --color-outline-active:           var(--outline-active);
+
+  --color-ghost-active:             var(--ghost-active);
+
+  --color-destructive-hover:        var(--destructive-hover);
+  --color-destructive-active:       var(--destructive-active);
 
   /* Primitive sandalwood scale → bg-sandalwood-*, text-sandalwood-* */
   --color-sandalwood-50:  var(--sandalwood-50);
