@@ -1,22 +1,166 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* =============================================================================
+   DARKROAST DESIGN TOKENS
+   Platform: Darkroast — Project management for graphic design agencies
+   Design language: Earthy, organic · Sandalwood + Dark Emerald · Soft rounding
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+   TOKEN STRUCTURE
+   ─────────────────────────────────────────────────────────────────────────────
+   Primitive tokens  →  Raw named values (sandalwood scale, emerald scale)
+   Semantic tokens   →  Purposeful aliases using ShadCN naming conventions
+   Radius tokens     →  Border radius scale derived from a single --radius base
+   ============================================================================= */
 
-@media (prefers-color-scheme: dark) {
+/* ---------------------------------------------------------------------------
+   PRIMITIVE COLOR TOKENS — Sandalwood scale
+   Warm, woody tan tones. Named after sandalwood heartwood.
+   --------------------------------------------------------------------------- */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --sandalwood-50:  #FDF8F1;
+    --sandalwood-100: #F8EDDA;
+    --sandalwood-200: #EDD9B4;
+    --sandalwood-300: #DEB97C;
+    --sandalwood-400: #CA9650;
+    --sandalwood-500: #B8793A;
+    --sandalwood-600: #9A6130;
+    --sandalwood-700: #7D4E27;
+    --sandalwood-800: #5F3A1C;
+    --sandalwood-900: #3D2510;
+
+    /* -------------------------------------------------------------------------
+       PRIMITIVE COLOR TOKENS — Dark Emerald scale
+       Deep forest-green tones. Named to avoid collision with Tailwind's emerald.
+       ------------------------------------------------------------------------- */
+    --dr-emerald-50:  #EEF6F1;
+    --dr-emerald-100: #C6E3D2;
+    --dr-emerald-200: #90C9A8;
+    --dr-emerald-300: #5BAE80;
+    --dr-emerald-400: #36905F;
+    --dr-emerald-500: #287A4D;
+    --dr-emerald-600: #1F623D;
+    --dr-emerald-700: #174D30;
+    --dr-emerald-800: #0F3821;
+    --dr-emerald-900: #092415;
+
+    /* -------------------------------------------------------------------------
+       PRIMITIVE BORDER RADIUS TOKEN
+       Single base value; all radius utilities are derived from this.
+       ------------------------------------------------------------------------- */
+    --radius: 0.5rem;   /* 8px — subtle, organic rounding */
+
+    /* -------------------------------------------------------------------------
+       SEMANTIC COLOR TOKENS  (ShadCN naming structure)
+       These are what components reference. Swap the primitive values here to
+       re-theme the entire platform.
+       -------------------------------------------------------------------------
+
+       Component map:
+         --background            page / panel background
+         --foreground            default body text
+         --primary               main CTA — sandalwood fill
+         --primary-foreground    text on primary fill
+         --secondary             secondary action — dark emerald fill
+         --secondary-foreground  text on secondary fill
+         --muted                 subtle backgrounds (inputs, tags)
+         --muted-foreground      de-emphasised text
+         --accent                hover / highlight tint — light emerald
+         --accent-foreground     text on accent
+         --destructive           danger actions — earthy rust
+         --destructive-foreground text on destructive
+         --border                default border colour
+         --input                 input border colour
+         --ring                  focus ring colour
+       ------------------------------------------------------------------------- */
+    --background:              var(--sandalwood-50);
+    --foreground:              var(--sandalwood-900);
+
+    --primary:                 var(--sandalwood-500);
+    --primary-foreground:      var(--sandalwood-50);
+
+    --secondary:               var(--dr-emerald-700);
+    --secondary-foreground:    var(--dr-emerald-50);
+
+    --muted:                   var(--sandalwood-100);
+    --muted-foreground:        var(--sandalwood-700);
+
+    --accent:                  var(--dr-emerald-100);
+    --accent-foreground:       var(--dr-emerald-800);
+
+    --destructive:             #B83C2B;
+    --destructive-foreground:  #FDF8F1;
+
+    --border:                  var(--sandalwood-200);
+    --input:                   var(--sandalwood-200);
+    --ring:                    var(--sandalwood-500);
   }
+}
+
+/* ---------------------------------------------------------------------------
+   @theme — Expose tokens to Tailwind's utility class engine
+   Tailwind v4 reads this block to generate bg-*, text-*, border-*, rounded-*
+   --------------------------------------------------------------------------- */
+@theme inline {
+  /* Existing base tokens */
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --font-sans:                  var(--font-geist-sans);
+  --font-mono:                  var(--font-geist-mono);
+
+  /* Semantic color → Tailwind utility mapping */
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+
+  --color-destructive:          var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border:               var(--border);
+  --color-input:                var(--input);
+  --color-ring:                 var(--ring);
+
+  /* Primitive sandalwood scale → bg-sandalwood-*, text-sandalwood-* */
+  --color-sandalwood-50:  var(--sandalwood-50);
+  --color-sandalwood-100: var(--sandalwood-100);
+  --color-sandalwood-200: var(--sandalwood-200);
+  --color-sandalwood-300: var(--sandalwood-300);
+  --color-sandalwood-400: var(--sandalwood-400);
+  --color-sandalwood-500: var(--sandalwood-500);
+  --color-sandalwood-600: var(--sandalwood-600);
+  --color-sandalwood-700: var(--sandalwood-700);
+  --color-sandalwood-800: var(--sandalwood-800);
+  --color-sandalwood-900: var(--sandalwood-900);
+
+  /* Primitive dark emerald scale → bg-dr-emerald-*, text-dr-emerald-* */
+  --color-dr-emerald-50:  var(--dr-emerald-50);
+  --color-dr-emerald-100: var(--dr-emerald-100);
+  --color-dr-emerald-200: var(--dr-emerald-200);
+  --color-dr-emerald-300: var(--dr-emerald-300);
+  --color-dr-emerald-400: var(--dr-emerald-400);
+  --color-dr-emerald-500: var(--dr-emerald-500);
+  --color-dr-emerald-600: var(--dr-emerald-600);
+  --color-dr-emerald-700: var(--dr-emerald-700);
+  --color-dr-emerald-800: var(--dr-emerald-800);
+  --color-dr-emerald-900: var(--dr-emerald-900);
+
+  /* ---------------------------------------------------------------------------
+     BORDER RADIUS TOKENS
+     All derived from --radius (0.5rem / 8px).
+     rounded-sm → 4px · rounded-md → 6px · rounded-lg → 8px · rounded-xl → 12px
+     --------------------------------------------------------------------------- */
+  --radius-sm: calc(var(--radius) - 4px);   /* 4px  */
+  --radius-md: calc(var(--radius) - 2px);   /* 6px  */
+  --radius-lg: var(--radius);               /* 8px  */
+  --radius-xl: calc(var(--radius) + 4px);   /* 12px */
 }
 
 body {
