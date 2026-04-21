@@ -3,163 +3,222 @@
 /* =============================================================================
    DARKROAST DESIGN TOKENS
    Platform: Darkroast — Project management for graphic design agencies
-   Design language: Earthy, organic · Sandalwood + Dark Emerald · Soft rounding
+   Source:   Figma variable export (Mode 1.tokens.json)
 
    TOKEN STRUCTURE
    ─────────────────────────────────────────────────────────────────────────────
-   Primitive tokens  →  Raw named values (sandalwood scale, emerald scale)
+   Primitive tokens  →  Raw Figma color scales (Primary, Neutral, Error, …)
    Semantic tokens   →  Purposeful aliases using ShadCN naming conventions
+   State tokens      →  Interactive state aliases (hover, active per variant)
+   Shadow tokens     →  Named box-shadow values
    Radius tokens     →  Border radius scale derived from a single --radius base
    ============================================================================= */
 
-/* ---------------------------------------------------------------------------
-   PRIMITIVE COLOR TOKENS — Sandalwood scale
-   Warm, woody tan tones. Named after sandalwood heartwood.
-   --------------------------------------------------------------------------- */
 @layer base {
   :root {
-    --sandalwood-50:  #FDF8F1;
-    --sandalwood-100: #F8EDDA;
-    --sandalwood-200: #EDD9B4;
-    --sandalwood-300: #DEB97C;
-    --sandalwood-400: #CA9650;
-    --sandalwood-500: #B8793A;
-    --sandalwood-600: #9A6130;
-    --sandalwood-700: #7D4E27;
-    --sandalwood-800: #5F3A1C;
-    --sandalwood-900: #3D2510;
 
-    /* -------------------------------------------------------------------------
-       PRIMITIVE COLOR TOKENS — Dark Emerald scale
-       Deep forest-green tones. Named to avoid collision with Tailwind's emerald.
-       ------------------------------------------------------------------------- */
-    --dr-emerald-50:  #EEF6F1;
-    --dr-emerald-100: #C6E3D2;
-    --dr-emerald-200: #90C9A8;
-    --dr-emerald-300: #5BAE80;
-    --dr-emerald-400: #36905F;
-    --dr-emerald-500: #287A4D;
-    --dr-emerald-600: #1F623D;
-    --dr-emerald-700: #174D30;
-    --dr-emerald-800: #0F3821;
-    --dr-emerald-900: #092415;
+    /* =========================================================================
+       PRIMITIVE COLOR TOKENS
+       Exact hex values from Figma. Never reference these directly in components
+       — always use a semantic or state token instead.
+       ========================================================================= */
 
-    /* -------------------------------------------------------------------------
+    /* ── Primary · Dark forest-green · Main brand color ─────────────────────── */
+    --primary-50:  #EAF6F0;
+    --primary-100: #C6E7D7;
+    --primary-200: #86C3A4;
+    --primary-300: #529B77;
+    --primary-400: #2F7A58;
+    --primary-500: #1E6042;
+    --primary-600: #164A33;   /* Primary 600 (Main) */
+    --primary-700: #0F3826;
+    --primary-800: #0A2A1C;
+    --primary-900: #061C13;
+
+    /* ── Neutral · Warm sandy beige · Sandalwood tones ───────────────────────── */
+    --neutral-50:  #FDF4E5;
+    --neutral-100: #F9F3EA;
+    --neutral-200: #F3EAE1;
+    --neutral-300: #EBDDCB;
+    --neutral-400: #E6D5C2;
+    --neutral-500: #CBB49B;
+    --neutral-600: #A58F78;
+    --neutral-700: #806B56;
+    --neutral-800: #5A4A3A;
+    --neutral-900: #342B22;
+
+    /* ── Error · Earthy rust-red ─────────────────────────────────────────────── */
+    --error-50:  #FEECEB;
+    --error-100: #FDD2CF;
+    --error-200: #FCAEA8;
+    --error-300: #FB8980;
+    --error-400: #F96559;
+    --error-500: #F84335;   /* Error 500 (Main) */
+    --error-600: #D3392D;
+    --error-700: #B03026;
+    --error-800: #8D261E;
+    --error-900: #701E18;
+
+    /* ── Warning · Amber-yellow ──────────────────────────────────────────────── */
+    --warning-50:  #FFF9E9;
+    --warning-100: #FFF1CB;
+    --warning-200: #FFE5A2;
+    --warning-300: #FFD977;
+    --warning-400: #FFCE4E;
+    --warning-500: #FFC327;   /* Warning 500 (Main) */
+    --warning-600: #D9A621;
+    --warning-700: #B58A1C;
+    --warning-800: #916F16;
+    --warning-900: #735812;
+
+    /* ── Info · Sky-blue ─────────────────────────────────────────────────────── */
+    --info-50:  #E8F3FD;
+    --info-100: #C7E1FA;
+    --info-200: #9BCAF6;
+    --info-300: #6CB2F2;
+    --info-400: #409AEE;
+    --info-500: #1684EA;   /* Info 500 (Main) */
+    --info-600: #1370C7;
+    --info-700: #105EA6;
+    --info-800: #0D4B85;
+    --info-900: #0A3B69;
+
+    /* ── Success · Bright lime-green ─────────────────────────────────────────── */
+    --success-50:  #EBFFF1;
+    --success-100: #C8FFDA;
+    --success-200: #A6FFC2;
+    --success-300: #83FFAA;
+    --success-400: #60FF92;
+    --success-500: #3DFF7A;   /* Success 500 (Main) */
+    --success-600: #24E761;
+    --success-700: #0DBE45;
+    --success-800: #00952F;
+    --success-900: #006C22;
+
+    /* ── Grey · Pure neutral ─────────────────────────────────────────────────── */
+    --grey-50:  #FFFFFF;
+    --grey-100: #F2F2F2;
+    --grey-200: #E6E6E6;
+    --grey-300: #D5D5D5;
+    --grey-400: #B1B1B1;
+    --grey-500: #909090;
+    --grey-600: #6D6D6D;
+    --grey-700: #464646;
+    --grey-800: #222222;
+    --grey-900: #000000;
+
+    /* =========================================================================
        PRIMITIVE BORDER RADIUS TOKEN
        Single base value; all radius utilities are derived from this.
-       ------------------------------------------------------------------------- */
+       ========================================================================= */
     --radius: 0.5rem;   /* 8px — subtle, organic rounding */
 
-    /* -------------------------------------------------------------------------
+    /* =========================================================================
        SEMANTIC COLOR TOKENS  (ShadCN naming structure)
-       These are what components reference. Swap the primitive values here to
-       re-theme the entire platform.
-       -------------------------------------------------------------------------
+       Components reference only these — never a primitive directly.
 
-       Component map:
          --background            page / panel background
          --foreground            default body text
-         --primary               main CTA — sandalwood fill
+         --primary               main CTA — dark forest green (Figma Primary 600)
          --primary-foreground    text on primary fill
-         --secondary             secondary action — dark emerald fill
+         --secondary             warm beige fill (Figma Neutral 300)
          --secondary-foreground  text on secondary fill
-         --muted                 subtle backgrounds (inputs, tags)
+         --muted                 subtle tint backgrounds
          --muted-foreground      de-emphasised text
-         --accent                hover / highlight tint — light emerald
+         --accent                hover / highlight tint — light green
          --accent-foreground     text on accent
-         --destructive           danger actions — earthy rust
+         --destructive           danger actions — earthy rust (Figma Error 500)
          --destructive-foreground text on destructive
          --border                default border colour
          --input                 input border colour
          --ring                  focus ring colour
-       ------------------------------------------------------------------------- */
-    --background:              var(--sandalwood-50);
-    --foreground:              var(--sandalwood-900);
+       ========================================================================= */
+    --background:              var(--neutral-50);    /* #FDF4E5 */
+    --foreground:              var(--neutral-900);   /* #342B22 */
 
-    --primary:                 var(--sandalwood-500);
-    --primary-foreground:      var(--sandalwood-50);
+    --primary:                 var(--primary-600);   /* #164A33 – Main */
+    --primary-foreground:      var(--primary-50);    /* #EAF6F0 */
 
-    --secondary:               var(--dr-emerald-700);
-    --secondary-foreground:    var(--dr-emerald-50);
+    --secondary:               var(--neutral-300);   /* #EBDDCB */
+    --secondary-foreground:    var(--neutral-900);   /* #342B22 */
 
-    --muted:                   var(--sandalwood-100);
-    --muted-foreground:        var(--sandalwood-700);
+    --muted:                   var(--neutral-100);   /* #F9F3EA */
+    --muted-foreground:        var(--neutral-700);   /* #806B56 */
 
-    --accent:                  var(--dr-emerald-100);
-    --accent-foreground:       var(--dr-emerald-800);
+    --accent:                  var(--primary-100);   /* #C6E7D7 */
+    --accent-foreground:       var(--primary-700);   /* #0F3826 */
 
-    --destructive:             #B83C2B;
-    --destructive-foreground:  #FDF8F1;
+    --destructive:             var(--error-500);     /* #F84335 – Main */
+    --destructive-foreground:  var(--grey-50);       /* #FFFFFF */
 
-    --border:                  var(--sandalwood-200);
-    --input:                   var(--sandalwood-200);
-    --ring:                    var(--sandalwood-500);
+    --border:                  var(--neutral-300);   /* #EBDDCB */
+    --input:                   var(--neutral-300);   /* #EBDDCB */
+    --ring:                    var(--primary-600);   /* #164A33 */
 
-    /* -------------------------------------------------------------------------
+    /* =========================================================================
        INTERACTIVE STATE TOKENS
-       One token per interactive state per variant. Components reference only
-       these — never a raw primitive or hex directly.
+       One token per interactive state per variant.
 
          --*-hover     colour when the pointer is over the element
          --*-active    colour while the element is being pressed
-       ------------------------------------------------------------------------- */
-    --primary-hover:              var(--sandalwood-600);
-    --primary-active:             var(--sandalwood-700);
+       ========================================================================= */
+    --primary-hover:              var(--primary-700);   /* #0F3826 */
+    --primary-active:             var(--primary-800);   /* #0A2A1C */
 
-    --secondary-hover:            var(--dr-emerald-800);
-    --secondary-active:           var(--dr-emerald-900);
+    --secondary-hover:            var(--neutral-400);   /* #E6D5C2 */
+    --secondary-active:           var(--neutral-500);   /* #CBB49B */
 
-    --outline-hover:              var(--sandalwood-100);
-    --outline-hover-foreground:   var(--sandalwood-700);
-    --outline-active:             var(--sandalwood-200);
+    --outline-hover:              var(--primary-50);    /* #EAF6F0 */
+    --outline-hover-foreground:   var(--primary-600);   /* #164A33 */
+    --outline-active:             var(--primary-100);   /* #C6E7D7 */
 
-    --ghost-active:               var(--dr-emerald-200);
+    --ghost-active:               var(--neutral-200);   /* #F3EAE1 */
 
-    --destructive-hover:          #A03325;
-    --destructive-active:         #8A2B1E;
+    --destructive-hover:          var(--error-600);     /* #D3392D */
+    --destructive-active:         var(--error-700);     /* #B03026 */
 
-    /* -------------------------------------------------------------------------
+    /* =========================================================================
        SHADOW TOKENS
-       Named box-shadow values — referenced via var() so they stay in the system.
-       ------------------------------------------------------------------------- */
-    --shadow-primary:             0 1px 3px 0 rgba(93, 58, 28, 0.18);
-    --shadow-secondary:           0 1px 3px 0 rgba(15, 56, 33, 0.22);
-    --shadow-destructive:         0 1px 3px 0 rgba(184, 60, 43, 0.22);
+       Each uses the fill colour's RGB as the shadow tint.
+       ========================================================================= */
+    --shadow-primary:     0 1px 3px 0 rgba(22,  74,  51,  0.20);  /* Primary-600 */
+    --shadow-secondary:   0 1px 3px 0 rgba(90,  74,  58,  0.15);  /* Neutral-800 */
+    --shadow-destructive: 0 1px 3px 0 rgba(248, 67,  53,  0.22);  /* Error-500   */
   }
 }
 
-/* ---------------------------------------------------------------------------
+/* =============================================================================
    @theme — Expose tokens to Tailwind's utility class engine
    Tailwind v4 reads this block to generate bg-*, text-*, border-*, rounded-*
-   --------------------------------------------------------------------------- */
+   ============================================================================= */
 @theme inline {
-  /* Existing base tokens */
-  --color-background:           var(--background);
-  --color-foreground:           var(--foreground);
-  --font-sans:                  var(--font-geist-sans);
-  --font-mono:                  var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 
-  /* Semantic color → Tailwind utility mapping */
-  --color-primary:              var(--primary);
-  --color-primary-foreground:   var(--primary-foreground);
+  /* Semantic color → Tailwind utility */
+  --color-background:               var(--background);
+  --color-foreground:               var(--foreground);
 
-  --color-secondary:            var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary:                  var(--primary);
+  --color-primary-foreground:       var(--primary-foreground);
 
-  --color-muted:                var(--muted);
-  --color-muted-foreground:     var(--muted-foreground);
+  --color-secondary:                var(--secondary);
+  --color-secondary-foreground:     var(--secondary-foreground);
 
-  --color-accent:               var(--accent);
-  --color-accent-foreground:    var(--accent-foreground);
+  --color-muted:                    var(--muted);
+  --color-muted-foreground:         var(--muted-foreground);
 
-  --color-destructive:          var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent:                   var(--accent);
+  --color-accent-foreground:        var(--accent-foreground);
 
-  --color-border:               var(--border);
-  --color-input:                var(--input);
-  --color-ring:                 var(--ring);
+  --color-destructive:              var(--destructive);
+  --color-destructive-foreground:   var(--destructive-foreground);
 
-  /* Interactive state token → Tailwind utility mapping */
+  --color-border:                   var(--border);
+  --color-input:                    var(--input);
+  --color-ring:                     var(--ring);
+
+  /* Interactive state token → Tailwind utility */
   --color-primary-hover:            var(--primary-hover);
   --color-primary-active:           var(--primary-active);
 
@@ -175,35 +234,91 @@
   --color-destructive-hover:        var(--destructive-hover);
   --color-destructive-active:       var(--destructive-active);
 
-  /* Primitive sandalwood scale → bg-sandalwood-*, text-sandalwood-* */
-  --color-sandalwood-50:  var(--sandalwood-50);
-  --color-sandalwood-100: var(--sandalwood-100);
-  --color-sandalwood-200: var(--sandalwood-200);
-  --color-sandalwood-300: var(--sandalwood-300);
-  --color-sandalwood-400: var(--sandalwood-400);
-  --color-sandalwood-500: var(--sandalwood-500);
-  --color-sandalwood-600: var(--sandalwood-600);
-  --color-sandalwood-700: var(--sandalwood-700);
-  --color-sandalwood-800: var(--sandalwood-800);
-  --color-sandalwood-900: var(--sandalwood-900);
+  /* ── Primitive: Primary scale → bg-primary-*, text-primary-* ─────────────── */
+  --color-primary-50:  var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
 
-  /* Primitive dark emerald scale → bg-dr-emerald-*, text-dr-emerald-* */
-  --color-dr-emerald-50:  var(--dr-emerald-50);
-  --color-dr-emerald-100: var(--dr-emerald-100);
-  --color-dr-emerald-200: var(--dr-emerald-200);
-  --color-dr-emerald-300: var(--dr-emerald-300);
-  --color-dr-emerald-400: var(--dr-emerald-400);
-  --color-dr-emerald-500: var(--dr-emerald-500);
-  --color-dr-emerald-600: var(--dr-emerald-600);
-  --color-dr-emerald-700: var(--dr-emerald-700);
-  --color-dr-emerald-800: var(--dr-emerald-800);
-  --color-dr-emerald-900: var(--dr-emerald-900);
+  /* ── Primitive: Neutral scale → bg-neutral-*, text-neutral-* ─────────────── */
+  --color-neutral-50:  var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
 
-  /* ---------------------------------------------------------------------------
-     BORDER RADIUS TOKENS
-     All derived from --radius (0.5rem / 8px).
-     rounded-sm → 4px · rounded-md → 6px · rounded-lg → 8px · rounded-xl → 12px
-     --------------------------------------------------------------------------- */
+  /* ── Primitive: Error scale → bg-error-*, text-error-* ───────────────────── */
+  --color-error-50:  var(--error-50);
+  --color-error-100: var(--error-100);
+  --color-error-200: var(--error-200);
+  --color-error-300: var(--error-300);
+  --color-error-400: var(--error-400);
+  --color-error-500: var(--error-500);
+  --color-error-600: var(--error-600);
+  --color-error-700: var(--error-700);
+  --color-error-800: var(--error-800);
+  --color-error-900: var(--error-900);
+
+  /* ── Primitive: Warning scale ─────────────────────────────────────────────── */
+  --color-warning-50:  var(--warning-50);
+  --color-warning-100: var(--warning-100);
+  --color-warning-200: var(--warning-200);
+  --color-warning-300: var(--warning-300);
+  --color-warning-400: var(--warning-400);
+  --color-warning-500: var(--warning-500);
+  --color-warning-600: var(--warning-600);
+  --color-warning-700: var(--warning-700);
+  --color-warning-800: var(--warning-800);
+  --color-warning-900: var(--warning-900);
+
+  /* ── Primitive: Info scale ────────────────────────────────────────────────── */
+  --color-info-50:  var(--info-50);
+  --color-info-100: var(--info-100);
+  --color-info-200: var(--info-200);
+  --color-info-300: var(--info-300);
+  --color-info-400: var(--info-400);
+  --color-info-500: var(--info-500);
+  --color-info-600: var(--info-600);
+  --color-info-700: var(--info-700);
+  --color-info-800: var(--info-800);
+  --color-info-900: var(--info-900);
+
+  /* ── Primitive: Success scale ─────────────────────────────────────────────── */
+  --color-success-50:  var(--success-50);
+  --color-success-100: var(--success-100);
+  --color-success-200: var(--success-200);
+  --color-success-300: var(--success-300);
+  --color-success-400: var(--success-400);
+  --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600);
+  --color-success-700: var(--success-700);
+  --color-success-800: var(--success-800);
+  --color-success-900: var(--success-900);
+
+  /* ── Primitive: Grey scale ────────────────────────────────────────────────── */
+  --color-grey-50:  var(--grey-50);
+  --color-grey-100: var(--grey-100);
+  --color-grey-200: var(--grey-200);
+  --color-grey-300: var(--grey-300);
+  --color-grey-400: var(--grey-400);
+  --color-grey-500: var(--grey-500);
+  --color-grey-600: var(--grey-600);
+  --color-grey-700: var(--grey-700);
+  --color-grey-800: var(--grey-800);
+  --color-grey-900: var(--grey-900);
+
+  /* ── Border radius ────────────────────────────────────────────────────────── */
   --radius-sm: calc(var(--radius) - 4px);   /* 4px  */
   --radius-md: calc(var(--radius) - 2px);   /* 6px  */
   --radius-lg: var(--radius);               /* 8px  */
